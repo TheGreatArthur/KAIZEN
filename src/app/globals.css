@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #faf7f2;
+  --card: #ffffff;
+  --card-muted: #f3eee6;
+  --ink: #1f1b16;
+  --muted: #645b51;
+  --line: #e7dfd3;
+  --accent: #d7263d;
+  --accent-ink: #b51d31;
+  --accent-soft: #fbe3e6;
+  --success: #2e9e5b;
+  --success-ink: #1d7341;
+  --success-soft: #dcf2e5;
+  --error: #d7263d;
+  --error-ink: #b51d31;
+  --error-soft: #fbe3e6;
+  --warning: #d97a00;
+  --shadow: 0 1px 2px rgb(31 27 22 / 0.04), 0 4px 16px rgb(31 27 22 / 0.06);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15120f;
+    --card: #221e1a;
+    --card-muted: #2c2722;
+    --ink: #f4eee6;
+    --muted: #b8ad9f;
+    --line: #3a332c;
+    --accent: #e8475b;
+    --accent-ink: #ff8a98;
+    --accent-soft: #4a1e25;
+    --success: #3fb56f;
+    --success-ink: #7ddba1;
+    --success-soft: #173826;
+    --error: #e8475b;
+    --error-ink: #ff8a98;
+    --error-soft: #4a1e25;
+    --warning: #f0a030;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.25);
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-card-muted: var(--card-muted);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-success-ink: var(--success-ink);
+  --color-success-soft: var(--success-soft);
+  --color-error: var(--error);
+  --color-error-ink: var(--error-ink);
+  --color-error-soft: var(--error-soft);
+  --color-warning: var(--warning);
+  --shadow-card: var(--shadow);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-jp: var(--font-zen-maru), "Hiragino Maru Gothic ProN", "Noto Sans JP", sans-serif;
+  --animate-pop: pop 260ms ease-out;
+  --animate-shake: shake 300ms ease-in-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.07); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
