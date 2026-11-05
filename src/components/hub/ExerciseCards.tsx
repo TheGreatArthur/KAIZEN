@@ -22,7 +22,7 @@ export function ExerciseCards({ script }: { script: KanaScript }) {
         if (!card.exercise) {
           return (
             <li key={card.slug}>
-              <Link href={`/${script}/${card.slug}`} className="flex h-full flex-col gap-3 rounded-3xl border-2 border-dashed border-line p-6 text-muted hover:bg-card/60">
+              <Link href={`/${script}/${card.slug}`} className="flex h-full flex-col gap-3 rounded-3xl border border-dashed border-line bg-card/30 p-6 text-muted transition-colors hover:bg-card/60">
                 <span aria-hidden className="font-jp text-5xl opacity-50">
                   {card.glyph}
                 </span>

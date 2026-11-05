@@ -1,11 +1,13 @@
+import { KaizenHero } from "@/components/home/KaizenHero";
 import { ResumeBlock } from "@/components/home/ResumeBlock";
 import { ScriptCards } from "@/components/home/ScriptCards";
 
 export default function Home() {
   return (
     <div className="flex flex-col gap-10">
-      <section className="pt-6 text-center sm:pt-12">
-        <p lang="ja" aria-hidden className="font-jp text-lg tracking-[0.3em] text-accent">
+      <section className="pt-2 text-center sm:pt-8">
+        <KaizenHero />
+        <p lang="ja" aria-hidden className="mt-4 font-jp text-base tracking-[0.3em] text-accent">
           ひらがな・カタカナ・漢字
         </p>
         <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">Apprenez à lire et écrire le japonais</h1>
