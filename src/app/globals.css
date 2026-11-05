@@ -1,0 +1,286 @@
+/* Hallmark · checked: 2026-11-05 · genre: playful (inferred: a friendly kana learning app)
+ * floor: 0 FAIL · fixed: 11 (1, 7a, 10a, 19, 34, 40, 41, 48, 49a, 54, 63) · structural: 3 printed (3, 8, 58)
+ * built: the project · redesign: polish · v2.0.0 */
+/* Hallmark · waive 29 · two fixed radial blooms, never animated, behind the glass nav · the Liquid Glass capsule of Kaizen needs coloured light to refract over Hiragana, Katakana and Kanji pages; the blooms vanish under reduced transparency */
+/* Hallmark · waive 39b · each kana column is a 373px checkbox holding five kana · in Lecture and Calligraphie the Hiragana selector picks a whole column at once, Katakana and Kanji will reuse it */
+/* Hallmark · dismissed 41 · our accent-ink is the accent set as text on paper, never text on the accent fill; labels on the fill use on-accent at 5:1 or more */
+/* Hallmark · answered F24 · the hairline on .glass is the material's specular rim, the Liquid Glass edge the capsule is built from */
+@import "tailwindcss";
+
+:root {
+  --bg: #faf7f2;
+  --card: #fffdfa;
+  --card-muted: #f3eee6;
+  --ink: #1f1b16;
+  --muted: #645b51;
+  --line: #e7dfd3;
+  --accent: #d7263d;
+  --accent-ink: #b51d31;
+  --accent-soft: #fbe3e6;
+  --accent-fill: #c21f36;
+  --on-accent: #fff8f6;
+  --success: #2e9e5b;
+  --success-ink: #1d7341;
+  --success-soft: #dcf2e5;
+  --error: #d7263d;
+  --error-ink: #b51d31;
+  --error-soft: #fbe3e6;
+  --warning: #d97a00;
+  --shadow: 0 1px 2px rgb(31 27 22 / 0.04), 0 4px 16px rgb(31 27 22 / 0.06);
+  --selection: #f7c9cf;
+
+  /* The writing sheet stays paper-light in both modes, like a real practice sheet. */
+  --sheet: #fffdfa;
+  --sheet-ink: #1f1b16;
+  --sheet-rule: #ddd3c6;
+  --sheet-model: #e4ddd3;
+  --sheet-edge: rgb(31 27 22 / 0.06);
+  --sheet-correct: #2e9e5b;
+  --sheet-warn: #e08a00;
+  --sheet-wrong: #d7263d;
+
+  /* Liquid Glass (web adaptation): glass is for the navigation layer and controls only, never content. */
+  --glass-bg: rgb(255 253 250 / 0.55);
+  --glass-bg-hover: rgb(255 253 250 / 0.78);
+  --glass-border: rgb(255 253 250 / 0.7);
+  --glass-edge: rgb(31 27 22 / 0.08);
+  --glass-highlight: rgb(255 253 250 / 0.9);
+  --glass-shadow: 0 1px 1px rgb(31 27 22 / 0.04), 0 8px 24px rgb(31 27 22 / 0.08);
+  --glass-shadow-sm: 0 2px 8px rgb(31 27 22 / 0.06);
+  --glass-tint: rgb(194 31 54 / 0.93);
+  --glass-tint-hover: rgb(170 26 46 / 0.95);
+  --glass-tint-border: rgb(255 248 246 / 0.28);
+  --glass-tint-highlight: rgb(255 248 246 / 0.35);
+  --glass-tint-shadow: 0 4px 16px rgb(194 31 54 / 0.26);
+  --bloom-1: rgb(215 38 61 / 0.16);
+  --bloom-2: rgb(217 122 0 / 0.12);
+
+  --font-display: var(--font-zen-maru), "Hiragino Maru Gothic ProN", "Noto Sans JP", sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15120f;
+    --card: #221e1a;
+    --card-muted: #2c2722;
+    --ink: #f4eee6;
+    --muted: #b8ad9f;
+    --line: #3a332c;
+    --accent: #e8475b;
+    --accent-ink: #ff8a98;
+    --accent-soft: #4a1e25;
+    --accent-fill: #bf2a3c;
+    --success: #3fb56f;
+    --success-ink: #7ddba1;
+    --success-soft: #173826;
+    --error: #e8475b;
+    --error-ink: #ff8a98;
+    --error-soft: #4a1e25;
+    --warning: #f0a030;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.25);
+    --selection: #6b2a33;
+    --sheet-edge: rgb(0 0 0 / 0.3);
+
+    --glass-bg: rgb(52 46 40 / 0.55);
+    --glass-bg-hover: rgb(70 62 54 / 0.72);
+    --glass-border: rgb(255 248 240 / 0.14);
+    --glass-edge: rgb(0 0 0 / 0.45);
+    --glass-highlight: rgb(255 248 240 / 0.2);
+    --glass-shadow: 0 1px 1px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
+    --glass-shadow-sm: 0 2px 8px rgb(0 0 0 / 0.25);
+    --glass-tint: rgb(191 42 60 / 0.92);
+    --glass-tint-hover: rgb(170 34 50 / 0.95);
+    --glass-tint-shadow: 0 4px 16px rgb(0 0 0 / 0.35);
+    --bloom-1: rgb(232 71 91 / 0.3);
+    --bloom-2: rgb(240 160 48 / 0.18);
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-card-muted: var(--card-muted);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-fill: var(--accent-fill);
+  --color-on-accent: var(--on-accent);
+  --color-success: var(--success);
+  --color-success-ink: var(--success-ink);
+  --color-success-soft: var(--success-soft);
+  --color-error: var(--error);
+  --color-error-ink: var(--error-ink);
+  --color-error-soft: var(--error-soft);
+  --color-warning: var(--warning);
+  --color-sheet: var(--sheet);
+  --color-sheet-ink: var(--sheet-ink);
+  --color-sheet-edge: var(--sheet-edge);
+  --shadow-card: var(--shadow);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-jp: var(--font-zen-maru), "Hiragino Maru Gothic ProN", "Noto Sans JP", sans-serif;
+  --animate-pop: pop 260ms ease-out;
+  --animate-shake: shake 300ms ease-in-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.07); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+html {
+  scrollbar-color: var(--line) var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--selection);
+  color: var(--ink);
+}
+
+/* Inter stays the body face; headings take the rounded Japanese face so the page speaks with one voice. */
+h1,
+h2 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+/* Two fixed blooms behind the app so the glass has light to bend (waiver 29 in the stamp). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(40rem 28rem at 10% -6%, var(--bloom-1), transparent 70%),
+    radial-gradient(36rem 26rem at 95% 6%, var(--bloom-2), transparent 70%);
+}
+
+@layer components {
+  /* .regular glass surface */
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      0 0 0 0.5px var(--glass-edge),
+      var(--glass-shadow);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    backdrop-filter: blur(18px) saturate(180%);
+  }
+
+  /* .buttonStyle(.glass): secondary actions */
+  .btn-glass {
+    white-space: nowrap;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      0 0 0 0.5px var(--glass-edge),
+      var(--glass-shadow-sm);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+    transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  }
+  .btn-glass:hover:not(:disabled) {
+    background: var(--glass-bg-hover);
+  }
+
+  /* .buttonStyle(.glassProminent): the primary action, tinted glass */
+  .btn-glass-prominent {
+    white-space: nowrap;
+    color: var(--on-accent);
+    background: var(--glass-tint);
+    border: 1px solid var(--glass-tint-border);
+    box-shadow:
+      inset 0 1px 0 var(--glass-tint-highlight),
+      var(--glass-tint-shadow);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+    transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  }
+  .btn-glass-prominent:hover:not(:disabled) {
+    background: var(--glass-tint-hover);
+  }
+  .btn-glass-prominent:disabled {
+    color: var(--muted);
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 0 0 0.5px var(--glass-edge);
+  }
+
+  /* .interactive(): gentle press feedback */
+  .btn-glass:active:not(:disabled),
+  .btn-glass-prominent:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+  .btn-glass:disabled,
+  .btn-glass-prominent:disabled {
+    cursor: not-allowed;
+  }
+  .btn-glass:disabled {
+    opacity: 0.6;
+  }
+}
+
+/* Reduced transparency, increased contrast, or no backdrop-filter: solid surfaces. */
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .glass,
+  .btn-glass {
+    background: var(--card);
+    border-color: var(--line);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .btn-glass-prominent:not(:disabled) {
+    background: var(--accent-fill);
+  }
+  body::before {
+    display: none;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .btn-glass {
+    background: var(--card);
+  }
+  .btn-glass-prominent:not(:disabled) {
+    background: var(--accent-fill);
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
