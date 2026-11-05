@@ -25,13 +25,21 @@ interface DrawingCanvasProps {
   label: string;
 }
 
-const INK = "#1a1a1a";
+const INK = "var(--sheet-ink)";
+
+/** Canvas 2D cannot read CSS variables: resolve `var(--token)` against the element's computed style. */
+function resolveColor(el: Element | null, color: string): string {
+  const m = /^var\((--[\w-]+)\)$/.exec(color);
+  if (!m || !el) return color;
+  return getComputedStyle(el).getPropertyValue(m[1]).trim() || color;
+}
 const MIN_W = 2.2;
 const MAX_W = 4.8;
 
 function drawStroke(ctx: CanvasRenderingContext2D, s: DrawnStroke, scale: number, color: string, from = 1) {
-  ctx.strokeStyle = color;
-  ctx.fillStyle = color;
+  const resolved = resolveColor(ctx.canvas, color);
+  ctx.strokeStyle = resolved;
+  ctx.fillStyle = resolved;
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
   if (s.points.length === 1) {
@@ -131,9 +139,9 @@ export function DrawingCanvas({ strokes, onStrokeEnd, colors, disabled, underlay
   };
 
   return (
-    <div ref={wrapper} className="relative overflow-hidden rounded-2xl bg-white shadow-card ring-1 ring-black/5" style={{ width: size, height: size }}>
+    <div ref={wrapper} className="relative overflow-hidden rounded-2xl bg-sheet shadow-card ring-1 ring-sheet-edge" style={{ width: size, height: size }}>
       <svg viewBox={`0 0 ${GLYPH_BOX} ${GLYPH_BOX}`} className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
-        <g stroke="#d9cfc2" strokeWidth={0.5} strokeDasharray="2 2">
+        <g strokeWidth={0.5} strokeDasharray="2 2" style={{ stroke: "var(--sheet-rule)" }}>
           <line x1={GLYPH_BOX / 2} y1={0} x2={GLYPH_BOX / 2} y2={GLYPH_BOX} />
           <line x1={0} y1={GLYPH_BOX / 2} x2={GLYPH_BOX} y2={GLYPH_BOX / 2} />
         </g>

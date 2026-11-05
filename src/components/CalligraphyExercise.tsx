@@ -14,11 +14,11 @@ import { KanaSelector } from "./KanaSelector";
 import { StrokeAnimator } from "./StrokeAnimator";
 
 const STATUS_COLOR: Record<StrokeStatus, string> = {
-  correct: "#2E9E5B",
-  reversed: "#E08A00",
-  misordered: "#E08A00",
-  wrong: "#D7263D",
-  extra: "#D7263D",
+  correct: "var(--sheet-correct)",
+  reversed: "var(--sheet-warn)",
+  misordered: "var(--sheet-warn)",
+  wrong: "var(--sheet-wrong)",
+  extra: "var(--sheet-wrong)",
 };
 
 const STATUS_LABEL: Record<StrokeStatus, string> = {
@@ -39,7 +39,7 @@ function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: 
       <input type="checkbox" className="peer sr-only" checked={checked} onChange={(e) => onChange(e.target.checked)} />
       <span
         aria-hidden
-        className="relative h-6 w-10 rounded-full bg-line transition-colors peer-checked:bg-accent peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow after:transition-transform peer-checked:after:translate-x-4"
+        className="relative h-6 w-10 rounded-full bg-line transition-colors peer-checked:bg-accent peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-card after:shadow after:transition-transform peer-checked:after:translate-x-4"
       />
       {label}
     </label>
@@ -58,7 +58,7 @@ function ToleranceSelect({ value, onChange }: { value: Tolerance; onChange: (t: 
           <label
             key={t}
             className={`cursor-pointer rounded-md px-2.5 py-1 transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-accent ${
-              value === t ? "bg-accent text-white" : "hover:bg-card-muted"
+              value === t ? "bg-accent-fill text-on-accent" : "hover:bg-card-muted"
             }`}
           >
             <input type="radio" name="tolerance" className="sr-only" checked={value === t} onChange={() => onChange(t)} />
@@ -160,7 +160,7 @@ function Practice({
             label={`Case d'écriture pour ${character.char}`}
             underlay={
               (showModel || result) && (
-                <g stroke="#e4ddd3">
+                <g style={{ stroke: "var(--sheet-model)" }}>
                   <GlyphPaths strokes={expected} width={5} />
                 </g>
               )
@@ -170,13 +170,13 @@ function Practice({
                 <>
                   <defs>
                     <marker id="guide-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-                      <path d="M0,0 L10,5 L0,10 z" fill="#D7263D" />
+                      <path d="M0,0 L10,5 L0,10 z" style={{ fill: "var(--sheet-wrong)" }} />
                     </marker>
                   </defs>
-                  <g stroke="#D7263D" strokeDasharray="3 3" opacity={0.75}>
+                  <g strokeDasharray="3 3" opacity={0.75} style={{ stroke: "var(--sheet-wrong)" }}>
                     <GlyphPaths strokes={[nextStroke]} width={1.6} pathProps={() => ({ markerEnd: "url(#guide-arrow)" })} />
                   </g>
-                  <circle cx={nextStroke.points[0].x} cy={nextStroke.points[0].y} r={2.4} fill="#D7263D" />
+                  <circle cx={nextStroke.points[0].x} cy={nextStroke.points[0].y} r={2.4} style={{ fill: "var(--sheet-wrong)" }} />
                 </>
               )
             }
@@ -301,7 +301,7 @@ export function CalligraphyExercise({ script }: { script: KanaScript }) {
           <span className="text-xl text-muted">/100</span>
         </p>
         <p className="text-muted">
-          Score moyen sur {results.length} caractère{results.length > 1 ? "s" : ""} validé{results.length > 1 ? "s" : ""} —{" "}
+          Score moyen sur {results.length} caractère{results.length > 1 ? "s" : ""} validé{results.length > 1 ? "s" : ""},{" "}
           {results.filter((r) => r.passed).length} réussi{results.filter((r) => r.passed).length > 1 ? "s" : ""}
         </p>
         <div className="flex flex-wrap justify-center gap-3">

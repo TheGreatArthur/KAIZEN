@@ -9,7 +9,7 @@ export function ProgressBar({ value, max, label }: { value: number; max: number;
         </span>
       </div>
       <div role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={max} aria-valuenow={value} className="h-2 overflow-hidden rounded-full bg-card-muted">
-        <div className="h-full rounded-full bg-accent transition-[width] duration-500" style={{ width: `${pct}%` }} />
+        <div className="h-full origin-left rounded-full bg-accent transition-transform duration-500" style={{ transform: `scaleX(${pct / 100})` }} />
       </div>
     </div>
   );

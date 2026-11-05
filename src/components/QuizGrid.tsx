@@ -115,7 +115,7 @@ export function QuizGrid({ characters, onAnswer, onFinish, onRestart, onBack }: 
           </button>
         </div>
         <div className="h-1 w-full overflow-hidden rounded-full bg-card-muted" aria-hidden>
-          <div className="h-full bg-accent transition-[width] duration-300" style={{ width: `${(answered / cards.length) * 100}%` }} />
+          <div className="h-full origin-left bg-accent transition-transform duration-300" style={{ transform: `scaleX(${answered / cards.length})` }} />
         </div>
       </div>
 

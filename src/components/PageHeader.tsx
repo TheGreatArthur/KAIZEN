@@ -4,9 +4,11 @@ export function PageHeader({ title, subtitle, back }: { title: string; subtitle?
   return (
     <header className="mb-8">
       {back && (
-        <Link href={back.href} className="text-sm text-muted hover:text-ink">
-          ← {back.label}
-        </Link>
+        <nav aria-label="Fil d'Ariane" className="text-sm">
+          <Link href={back.href} className="text-muted underline-offset-2 hover:text-ink hover:underline">
+            {back.label}
+          </Link>
+        </nav>
       )}
       <h1 className="mt-1 text-3xl font-bold tracking-tight">{title}</h1>
       {subtitle && <p className="mt-2 max-w-2xl text-muted">{subtitle}</p>}

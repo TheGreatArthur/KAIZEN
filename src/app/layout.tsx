@@ -14,7 +14,7 @@ const zenMaru = Zen_Maru_Gothic({
 });
 
 export const metadata: Metadata = {
-  title: { default: "Kaizen — Apprendre l'écriture japonaise", template: "%s · Kaizen" },
+  title: { default: "Kaizen : apprendre l'écriture japonaise", template: "%s | Kaizen" },
   description: "Apprenez à lire et à écrire les hiragana, puis les katakana et les kanji.",
 };
 

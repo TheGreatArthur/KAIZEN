@@ -37,7 +37,7 @@ function Column({ row, selected, onToggle }: { row: CharacterRow; selected: bool
       <span
         aria-hidden
         className={`absolute right-1.5 top-1.5 grid h-5 w-5 place-items-center rounded-full text-xs transition-colors ${
-          selected ? "bg-accent text-white" : "border border-line text-transparent"
+          selected ? "bg-accent-fill text-on-accent" : "border border-line text-transparent"
         }`}
       >
         ✓

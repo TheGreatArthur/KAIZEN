@@ -17,12 +17,12 @@ export function ResumeBlock() {
           Reprendre
         </h2>
         <p className="text-sm text-muted">
-          {EXERCISE_LABELS[slug]} des hiragana — {formatRelative(last.startedAt)}
-          {last.total > 0 && ` · ${last.correct}/${last.total}`}
+          {EXERCISE_LABELS[slug]} des hiragana, {formatRelative(last.startedAt)}.
+          {last.total > 0 && ` Score : ${last.correct}/${last.total}.`}
         </p>
       </div>
       <Link href={`/${last.script}/${slug}`} className="ml-auto btn-glass-prominent rounded-full px-5 py-2.5 font-semibold">
-        Continuer → {EXERCISE_LABELS[slug]}
+        Continuer la {EXERCISE_LABELS[slug].toLowerCase()}
       </Link>
     </section>
   );

@@ -47,7 +47,7 @@ export function ExerciseCards({ script }: { script: KanaScript }) {
                 <ProgressBar value={summary?.masteredBy[card.exercise] ?? 0} max={summary?.total ?? 0} label="Kana maîtrisés" />
                 <span className="text-xs text-muted">
                   Dernière session :{" "}
-                  {last ? `${formatRelative(last.startedAt)}${last.total ? ` · ${last.correct}/${last.total}` : ""}` : "aucune"}
+                  {last ? `${formatRelative(last.startedAt)}${last.total ? `, score ${last.correct}/${last.total}` : ""}` : "aucune"}
                 </span>
               </span>
             </Link>

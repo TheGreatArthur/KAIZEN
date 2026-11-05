@@ -61,7 +61,7 @@ export function StrokeAnimator({ strokes, label, size = 140 }: StrokeAnimatorPro
         height={size}
         role="img"
         aria-label={label}
-        className="rounded-2xl bg-white text-[#1f1b16]"
+        className="rounded-2xl bg-sheet text-sheet-ink"
       >
         <GlyphPaths strokes={strokes} width={3.5} pathProps={() => ({ stroke: "currentColor", "data-stroke": "" } as never)} />
       </svg>
