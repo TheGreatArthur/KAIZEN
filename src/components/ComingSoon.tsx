@@ -11,7 +11,7 @@ export function ComingSoon({ title, glyph }: { title: string; glyph: string }) {
         {title} <SoonBadge />
       </h1>
       <p className="mt-3 text-muted">Cette section est en cours de préparation. Revenez bientôt !</p>
-      <Link href="/hiragana" className="mt-6 inline-flex rounded-xl bg-accent px-5 py-2.5 font-medium text-white hover:bg-accent-ink">
+      <Link href="/hiragana" className="mt-6 inline-flex btn-glass-prominent rounded-full px-5 py-2.5 font-medium">
         Continuer avec les hiragana
       </Link>
     </section>

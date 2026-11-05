@@ -107,10 +107,10 @@ export function QuizGrid({ characters, onAnswer, onFinish, onRestart, onBack }: 
           </div>
         </dl>
         <div className="ml-auto flex gap-2">
-          <button type="button" onClick={onRestart} className="rounded-lg border border-line px-3 py-1.5 text-sm hover:bg-card-muted">
+          <button type="button" onClick={onRestart} className="btn-glass rounded-full px-3 py-1.5 text-sm">
             Recommencer
           </button>
-          <button type="button" onClick={onBack} className="rounded-lg border border-line px-3 py-1.5 text-sm hover:bg-card-muted">
+          <button type="button" onClick={onBack} className="btn-glass rounded-full px-3 py-1.5 text-sm">
             Retour à la sélection
           </button>
         </div>

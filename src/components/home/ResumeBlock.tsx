@@ -21,7 +21,7 @@ export function ResumeBlock() {
           {last.total > 0 && ` · ${last.correct}/${last.total}`}
         </p>
       </div>
-      <Link href={`/${last.script}/${slug}`} className="ml-auto rounded-xl bg-accent px-5 py-2.5 font-semibold text-white hover:bg-accent-ink">
+      <Link href={`/${last.script}/${slug}`} className="ml-auto btn-glass-prominent rounded-full px-5 py-2.5 font-semibold">
         Continuer → {EXERCISE_LABELS[slug]}
       </Link>
     </section>

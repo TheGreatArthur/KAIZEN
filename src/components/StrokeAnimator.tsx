@@ -69,7 +69,7 @@ export function StrokeAnimator({ strokes, label, size = 140 }: StrokeAnimatorPro
         type="button"
         onClick={play}
         disabled={playing || strokes.length === 0}
-        className="rounded-lg border border-line px-3 py-1.5 text-sm font-medium hover:bg-card-muted disabled:opacity-60"
+        className="btn-glass rounded-full px-3 py-1.5 text-sm font-medium"
       >
         {playing ? "Animation…" : "Voir l'ordre des traits"}
       </button>

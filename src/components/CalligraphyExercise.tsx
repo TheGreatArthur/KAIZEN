@@ -123,7 +123,7 @@ function Practice({
     setResult(null);
   };
 
-  const btn = "rounded-xl border border-line px-4 py-2 text-sm font-medium hover:bg-card-muted disabled:cursor-not-allowed disabled:opacity-50";
+  const btn = "btn-glass rounded-full px-4 py-2 text-sm font-medium";
 
   return (
     <div className="flex flex-col gap-6">
@@ -134,7 +134,7 @@ function Practice({
         <Toggle checked={showModel} onChange={setShowModel} label="Modèle" />
         <Toggle checked={guided} onChange={setGuided} label="Guidé" />
         <ToleranceSelect value={tolerance} onChange={setTolerance} />
-        <button type="button" onClick={onBack} className="ml-auto rounded-lg border border-line px-3 py-1.5 text-sm hover:bg-card-muted">
+        <button type="button" onClick={onBack} className="ml-auto btn-glass rounded-full px-3 py-1.5 text-sm">
           Retour à la sélection
         </button>
       </div>
@@ -190,7 +190,7 @@ function Practice({
             </button>
             <button
               type="button"
-              className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-ink disabled:cursor-not-allowed disabled:bg-line disabled:text-muted"
+              className="btn-glass-prominent rounded-full px-4 py-2 text-sm font-semibold"
               disabled={!strokes.length || !!result || expected.length === 0}
               onClick={validate}
             >
@@ -305,10 +305,10 @@ export function CalligraphyExercise({ script }: { script: KanaScript }) {
           {results.filter((r) => r.passed).length} réussi{results.filter((r) => r.passed).length > 1 ? "s" : ""}
         </p>
         <div className="flex flex-wrap justify-center gap-3">
-          <button type="button" onClick={start} className="rounded-xl bg-accent px-5 py-2.5 font-semibold text-white hover:bg-accent-ink">
+          <button type="button" onClick={start} className="btn-glass-prominent rounded-full px-5 py-2.5 font-semibold">
             Nouvelle série
           </button>
-          <button type="button" onClick={() => setPhase({ name: "select" })} className="rounded-xl border border-line px-5 py-2.5 font-semibold hover:bg-card-muted">
+          <button type="button" onClick={() => setPhase({ name: "select" })} className="btn-glass rounded-full px-5 py-2.5 font-semibold">
             Changer la sélection
           </button>
         </div>

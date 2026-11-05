@@ -78,7 +78,7 @@ export function KanaSelector({ groups, selected, onChange, startLabel, onStart, 
         <button
           type="button"
           onClick={() => setRows(allRows, !allSelected)}
-          className="rounded-xl border border-line px-4 py-2 text-sm font-medium hover:bg-card-muted"
+          className="btn-glass rounded-full px-4 py-2 text-sm font-medium"
         >
           {allSelected ? "Tout désélectionner" : "Tout sélectionner"}
         </button>
@@ -91,7 +91,7 @@ export function KanaSelector({ groups, selected, onChange, startLabel, onStart, 
             type="button"
             onClick={onStart}
             disabled={count === 0}
-            className="rounded-xl bg-accent px-5 py-2.5 font-semibold text-white transition-colors hover:bg-accent-ink disabled:cursor-not-allowed disabled:bg-line disabled:text-muted"
+            className="btn-glass-prominent rounded-full px-5 py-2.5 font-semibold"
           >
             {startLabel}
           </button>

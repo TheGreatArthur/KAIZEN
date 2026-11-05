@@ -85,6 +85,149 @@ body {
   color: var(--ink);
 }
 
+/* ------------------------------------------------------------------
+   Liquid Glass (web adaptation)
+   Rules borrowed from Apple's Liquid Glass guidelines:
+   - glass is for the navigation layer and controls only, never content;
+   - glass needs something colourful behind it to refract (ambient layer);
+   - nearby glass shares one surface (the navbar is a single capsule);
+   - solid fallbacks for reduced transparency, higher contrast and
+     browsers without backdrop-filter.
+   ------------------------------------------------------------------ */
+
+:root {
+  --glass-bg: rgb(255 255 255 / 0.55);
+  --glass-bg-hover: rgb(255 255 255 / 0.75);
+  --glass-border: rgb(255 255 255 / 0.7);
+  --glass-edge: rgb(31 27 22 / 0.08);
+  --glass-highlight: rgb(255 255 255 / 0.9);
+  --glass-shadow: 0 1px 1px rgb(31 27 22 / 0.04), 0 8px 24px rgb(31 27 22 / 0.08);
+  --glass-tint: rgb(215 38 61 / 0.82);
+  --glass-tint-hover: rgb(181 29 49 / 0.88);
+  --ambient-1: rgb(215 38 61 / 0.16);
+  --ambient-2: rgb(217 122 0 / 0.12);
+  --ambient-3: rgb(46 158 91 / 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-bg: rgb(44 39 34 / 0.5);
+    --glass-bg-hover: rgb(58 51 44 / 0.7);
+    --glass-border: rgb(255 255 255 / 0.12);
+    --glass-edge: rgb(0 0 0 / 0.4);
+    --glass-highlight: rgb(255 255 255 / 0.16);
+    --glass-shadow: 0 1px 1px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
+    --glass-tint: rgb(232 71 91 / 0.78);
+    --glass-tint-hover: rgb(232 71 91 / 0.92);
+    --ambient-1: rgb(232 71 91 / 0.18);
+    --ambient-2: rgb(240 160 48 / 0.1);
+    --ambient-3: rgb(63 181 111 / 0.08);
+  }
+}
+
+/* Soft colour fields behind the whole app so glass has light to bend. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(40rem 28rem at 12% -6%, var(--ambient-1), transparent 70%),
+    radial-gradient(36rem 26rem at 95% 8%, var(--ambient-2), transparent 70%),
+    radial-gradient(44rem 30rem at 50% 110%, var(--ambient-3), transparent 70%);
+}
+
+@layer components {
+  /* .regular glass surface */
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      0 0 0 0.5px var(--glass-edge),
+      var(--glass-shadow);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    backdrop-filter: blur(18px) saturate(180%);
+  }
+
+  /* .buttonStyle(.glass) — secondary actions */
+  .btn-glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      0 0 0 0.5px var(--glass-edge),
+      0 2px 8px rgb(31 27 22 / 0.06);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+    transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  }
+  .btn-glass:hover:not(:disabled) {
+    background: var(--glass-bg-hover);
+  }
+
+  /* .buttonStyle(.glassProminent) — primary action, tinted glass */
+  .btn-glass-prominent {
+    color: #fff;
+    background: var(--glass-tint);
+    border: 1px solid rgb(255 255 255 / 0.28);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.35),
+      0 4px 16px rgb(215 38 61 / 0.28);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+    transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  }
+  .btn-glass-prominent:hover:not(:disabled) {
+    background: var(--glass-tint-hover);
+  }
+  .btn-glass-prominent:disabled {
+    color: var(--muted);
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 0 0 0.5px var(--glass-edge);
+  }
+
+  /* .interactive() — gentle press feedback */
+  .btn-glass:active:not(:disabled),
+  .btn-glass-prominent:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+  .btn-glass:disabled,
+  .btn-glass-prominent:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+/* Accessibility: Reduced Transparency / Increased Contrast / no support → solid. */
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .glass,
+  .btn-glass {
+    background: var(--card);
+    border-color: var(--line);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .btn-glass-prominent:not(:disabled) {
+    background: var(--accent);
+  }
+  body::before {
+    display: none;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .btn-glass {
+    background: var(--card);
+  }
+  .btn-glass-prominent:not(:disabled) {
+    background: var(--accent);
+  }
+}
+
 :focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 2px;

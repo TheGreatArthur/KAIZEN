@@ -64,18 +64,18 @@ export function ResultsPanel({ cards, durationMs, onRetryMistakes, onNewQuiz, on
 
       <div className="flex flex-wrap justify-center gap-3">
         {mistakes.length > 0 && (
-          <button type="button" onClick={onRetryMistakes} className="rounded-xl bg-accent px-5 py-2.5 font-semibold text-white hover:bg-accent-ink">
+          <button type="button" onClick={onRetryMistakes} className="btn-glass-prominent rounded-full px-5 py-2.5 font-semibold">
             Réessayer les erreurs
           </button>
         )}
         <button
           type="button"
           onClick={onNewQuiz}
-          className={`rounded-xl px-5 py-2.5 font-semibold ${mistakes.length ? "border border-line hover:bg-card-muted" : "bg-accent text-white hover:bg-accent-ink"}`}
+          className={`rounded-full px-5 py-2.5 font-semibold ${mistakes.length ? "btn-glass" : "btn-glass-prominent"}`}
         >
           Nouveau quiz
         </button>
-        <button type="button" onClick={onChangeSelection} className="rounded-xl border border-line px-5 py-2.5 font-semibold hover:bg-card-muted">
+        <button type="button" onClick={onChangeSelection} className="btn-glass rounded-full px-5 py-2.5 font-semibold">
           Changer la sélection
         </button>
       </div>
